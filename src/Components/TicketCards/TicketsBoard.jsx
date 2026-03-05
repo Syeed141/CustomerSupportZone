@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-export default function TicketsBoard({ TaskState, SetTaskState, SetResolvedTask }) {
-  console.log(TaskState);
+import { ToastContainer, toast } from "react-toastify";
+
+export default function TicketsBoard({ SetTaskState, SetResolvedTask }) {
+ 
   // all tickets (left side)
   const [tickets, setTickets] = useState([]);
   // selected tickets (Task Status) — NOW AN ARRAY
@@ -9,7 +11,7 @@ export default function TicketsBoard({ TaskState, SetTaskState, SetResolvedTask 
   // resolved tickets
   const [resolved, setResolved] = useState([]);
 
-  // load tickets from public/tickets.json
+  // load tickets 
   useEffect(() => {
     fetch("/tickets.json")
       .then((res) => res.json())
@@ -17,20 +19,24 @@ export default function TicketsBoard({ TaskState, SetTaskState, SetResolvedTask 
       .catch((err) => console.log("Failed to load tickets.json:", err));
   }, []);
 
-  // add a ticket to Task Status (prevent duplicates)
- const selectTicket = (ticket) => {
-  const exists = selected.some((t) => t.id === ticket.id);
-  if (exists) return;
+  // add a ticket to Task Status 
+  const selectTicket = (ticket) => {
+    
+    toast.info("Task added to the queue!");
+    const exists = selected.some((t) => t.id === ticket.id);
+    if (exists) return;
 
-  setSelected((prev) => [...prev, ticket]);
-  SetTaskState((prev) => prev + 1);
-};
+    setSelected((prev) => [...prev, ticket]);
+    SetTaskState((prev) => prev + 1);
+  };
 
-  // complete ONE selected task (move it to resolved)
+  // complete ONE selected task 
   const completeTask = (task) => {
+   
+    toast.success("Task has been resolved!");
 
-     SetTaskState((prev) => prev - 1);
-     SetResolvedTask((prev) => prev + 1)
+    SetTaskState((prev) => prev - 1);
+    SetResolvedTask((prev) => prev + 1);
     // move -> resolved
     setResolved((prev) => [{ ...task, status: "Resolved" }, ...prev]);
 
@@ -60,7 +66,7 @@ export default function TicketsBoard({ TaskState, SetTaskState, SetResolvedTask 
   return (
     <div className="max-w-6xl mx-auto p-6">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* LEFT: Ticket cards */}
+       
         <div className="lg:col-span-2">
           <h2 className="text-lg font-semibold text-neutral-900 mb-4">
             Customer Tickets
@@ -98,9 +104,9 @@ export default function TicketsBoard({ TaskState, SetTaskState, SetResolvedTask 
           </div>
         </div>
 
-        {/* RIGHT: Task Status + Resolved */}
+       
         <div className="space-y-6">
-          {/* Task Status */}
+         
           <div className="rounded-xl border border-black/5 bg-white p-5 shadow-sm">
             <h3 className="text-base font-semibold text-neutral-900">
               Task Status
@@ -149,7 +155,7 @@ export default function TicketsBoard({ TaskState, SetTaskState, SetResolvedTask 
             )}
           </div>
 
-          {/* Resolved */}
+         
           <div className="rounded-xl border border-black/5 bg-white p-5 shadow-sm">
             <h3 className="text-base font-semibold text-neutral-900">
               Resolved Task

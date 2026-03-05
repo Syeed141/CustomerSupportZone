@@ -3,7 +3,7 @@ import React from "react";
 const StatCard = ({ title, value, gradientClass }) => {
   return (
     <div className={`relative overflow-hidden rounded-xl p-8 ${gradientClass}`}>
-      {/* Wave overlay */}
+     
       <svg
         className="pointer-events-none absolute inset-0 h-full w-full opacity-25"
         viewBox="0 0 1200 300"
@@ -18,7 +18,7 @@ const StatCard = ({ title, value, gradientClass }) => {
         </g>
       </svg>
 
-      {/* Content */}
+     
       <div className="relative flex flex-col items-center justify-center text-center text-white">
         <p className="text-sm font-medium opacity-90">{title}</p>
         <p className="mt-2 text-5xl font-semibold leading-none">{value}</p>

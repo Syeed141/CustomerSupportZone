@@ -39,7 +39,7 @@ const Navbar = () => {
 
     
       <div className="navbar-end gap-3">
-       {/* Desktop menu */}
+       
         <ul className="menu menu-horizontal hidden lg:flex px-1 gap-1 text-sm">
           <li><a>Home</a></li>
           <li><a>FAQ</a></li>
