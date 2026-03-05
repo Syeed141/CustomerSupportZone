@@ -28,20 +28,20 @@ const StatCard = ({ title, value, gradientClass }) => {
 };
 
 export default function Banner({
-  inProgress = 0,
-  resolved = 0,
+  ResolvedTask,
+  TaskState
 }) {
   return (
     <div className="mx-auto w-full max-w-6xl px-4">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 mt-10 mb-10">
         <StatCard
           title="In-Progress"
-          value={inProgress}
+          value={TaskState}
           gradientClass="bg-gradient-to-r from-violet-600 to-purple-500"
         />
         <StatCard
           title="Resolved"
-          value={resolved}
+          value={ResolvedTask}
           gradientClass="bg-gradient-to-r from-emerald-500 to-teal-700"
         />
       </div>
